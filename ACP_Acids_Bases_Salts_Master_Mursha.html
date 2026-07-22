@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACP — Acids, Bases and Salts | Novus Era Classes</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#171a21;
+    --card-alt:#1c2029;
+    --border:#2a2f3a;
+    --text:#e8e9ee;
+    --muted:#9aa0ac;
+    --accent:#ff5757;
+    --accent2:#5b8cff;
+    --tip:#20351f;
+    --tip-b:#3fae4a;
+    --def:#1b2b40;
+    --def-b:#4a90e2;
+    --mistake:#3a1f22;
+    --mistake-b:#e05252;
+    --mnemonic:#33291a;
+    --mnemonic-b:#e0a83f;
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    margin:0;
+    padding:0;
+    line-height:1.55;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:20px 16px 60px;}
+
+  /* HEADER */
+  header{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    background:linear-gradient(135deg,#1a1d25,#12141a);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:22px;
+  }
+  header img{
+    width:84px;height:84px;border-radius:50%;
+    object-fit:cover;border:3px solid var(--accent);
+    flex-shrink:0;
+  }
+  header .htext .brand{
+    font-size:12px;letter-spacing:2px;color:var(--muted);
+    text-transform:uppercase;font-weight:600;
+  }
+  header .htext h1{
+    margin:4px 0 2px;font-size:26px;color:#fff;
+  }
+  header .htext .sub{color:var(--accent);font-weight:600;font-size:14px;}
+  header .htext .teacher{color:var(--muted);font-size:13px;margin-top:2px;}
+
+  .banner{
+    background:linear-gradient(90deg,var(--accent),#c23c3c);
+    color:#fff;text-align:center;font-weight:700;
+    padding:10px;border-radius:10px;margin-bottom:22px;
+    font-size:15px;letter-spacing:.5px;
+  }
+
+  h2.part{
+    background:var(--card-alt);
+    border-left:4px solid var(--accent2);
+    padding:10px 16px;border-radius:8px;
+    font-size:17px;margin-top:34px;margin-bottom:16px;
+    color:#fff;
+  }
+  .instr{color:var(--muted);font-size:13px;font-style:italic;margin:-8px 0 16px 4px;}
+
+  .q{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:16px 18px;
+    margin-bottom:14px;
+  }
+  .q .qtext{font-weight:600;margin-bottom:10px;color:#fff;}
+  .q .qtext .qn{color:var(--accent2);margin-right:6px;}
+  .options{
+    display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  }
+  @media(max-width:520px){.options{grid-template-columns:1fr;}}
+  .opt{
+    background:var(--card-alt);border:1px solid var(--border);
+    border-radius:8px;padding:8px 12px;font-size:14px;color:var(--text);
+  }
+
+  details.ans{margin-top:10px;}
+  details.ans summary{
+    cursor:pointer;color:var(--accent2);font-size:13px;font-weight:600;
+    list-style:none;padding:6px 0;
+  }
+  details.ans summary::-webkit-details-marker{display:none;}
+  details.ans summary:before{content:"▸ ";}
+  details.ans[open] summary:before{content:"▾ ";}
+  details.ans .reveal{
+    background:#101820;border:1px solid #234;
+    border-radius:8px;padding:10px 14px;margin-top:6px;
+    font-size:14px;color:#c9e6ff;
+  }
+
+  .box{
+    border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px;
+  }
+  .box.def{background:var(--def);border-left:4px solid var(--def-b);}
+  .box.tip{background:var(--tip);border-left:4px solid var(--tip-b);}
+  .box.mistake{background:var(--mistake);border-left:4px solid var(--mistake-b);}
+  .box.mnemonic{background:var(--mnemonic);border-left:4px solid var(--mnemonic-b);}
+  .box .label{font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;display:block;}
+
+  .case{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;
+    padding:18px;margin-bottom:18px;
+  }
+  .case .passage{color:var(--muted);font-size:14px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px dashed var(--border);}
+  .case ol{padding-left:20px;}
+
+  footer{
+    text-align:center;color:var(--muted);font-size:12px;margin-top:40px;
+    border-top:1px solid var(--border);padding-top:16px;
+  }
+  .pill{
+    display:inline-block;background:var(--card-alt);border:1px solid var(--border);
+    border-radius:20px;padding:4px 12px;font-size:12px;color:var(--accent2);margin-bottom:10px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAAAAAAD/4QBYRXhpZgAATU0AKgAAAAgABAEAAAQAAAABAAAFoAEBAAQAAAABAAAFoIdpAAQAAAABAAAAPgESAAQAAAABAAAAAAAAAAAAAZIIAAQAAAABAAAAAAAAAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/4QqXaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Ij8iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgVGVzdC5TTkFQU0hPVCI+CiAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICAgICAgeG1sbnM6QXR0cmliPSJodHRwOi8vbnMuYXR0cmlidXRpb24uY29tL2Fkcy8xLjAvIj4KICAgICAgPEF0dHJpYjpBZHM+CiAgICAgICAgPHJkZjpTZXE+CiAgICAgICAgICA8cmRmOmxpCiAgICAgICAgICAgIEF0dHJpYjpGYklkPSI1MjUyNjU5MTQxNzk1ODAiCiAgICAgICAgICAgIEF0dHJpYjpDcmVhdGVkPSIyMDI2LTA3LTA0IgogICAgICAgICAgICBBdHRyaWI6VG91Y2hUeXBlPSIyIgogICAgICAgICAgICBBdHRyaWI6RXh0SWQ9IjIxMjVjMGU4LWY5N2MtNDFiZS1iYmQ2LWUxM2ExN2ZhMDlmMiIvPgogICAgICAgIDwvcmRmOlNlcT4KICAgICAgPC9BdHRyaWI6QWRzPgogICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgIAo8P3hwYWNrZXQgZW5kPSJ3Ij8+/9sAQwAGBAQFBAQGBQUFBgYGBwkOCQkICAkSDQ0KDhUSFhYVEhQUFxohHBcYHxkUFB0nHR8iIyUlJRYcKSwoJCshJCUk/9sAQwEGBgYJCAkRCQkRJBgUGCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQk/8AAEQgBQAFAAwEiAAIRAQMRAf/EAB0AAAAHAQEBAAAAAAAAAAAAAAABAgMEBQYHCAn/xABCEAABAwMCAwUFBwQBAgUFAQABAAIDBAUREiEGMUEHEyJRYRRxcoHBIzIzQpGhsQgVUtFiFiRDU4KS4SU0Y6Lw8f/EABoBAQEAAwEBAAAAAAAAAAAAAAABAgMEBQb/xAApEQEAAgICAgICAQQDAQAA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" alt="Master Mursha">
+    <div class="htext">
+      <div class="brand">Novus Era Classes</div>
+      <h1>ACP — Acids, Bases and Salts</h1>
+      <div class="sub">Aarambh Chapterwise Problems · Class 10th Science</div>
+      <div class="teacher">by Master Mursha</div>
+    </div>
+  </header>
+
+  <div class="banner">Read every question carefully before marking your answer!</div>
+
+  <!-- PART 1 -->
+  <h2 class="part">Part 1 — Basic MCQs</h2>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q1.</span> Farmers usually treat acidic soil in their fields by mixing in:</div>
+    <div class="options">
+      <div class="opt">(a) Quicklime</div>
+      <div class="opt">(b) Alum</div>
+      <div class="opt">(c) Ammonium sulphate</div>
+      <div class="opt">(d) Copper sulphate</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(a) Quicklime — it is basic in nature and neutralises excess soil acidity.</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q2.</span> A certain solution turns red litmus paper blue. Adding an excess of which liquid below would reverse this colour change?</div>
+    <div class="options">
+      <div class="opt">(a) Baking soda solution</div>
+      <div class="opt">(b) Lime water</div>
+      <div class="opt">(c) Dilute hydrochloric acid</div>
+      <div class="opt">(d) Ammonium hydroxide solution</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(c) Dilute hydrochloric acid — an acid is needed to neutralise the basic solution and turn litmus red again.</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q3.</span> The pH range within which human blood normally stays for the body to function is:</div>
+    <div class="options">
+      <div class="opt">(a) 6.0 – 6.5</div>
+      <div class="opt">(b) 7.35 – 7.45</div>
+      <div class="opt">(c) 8.0 – 9.0</div>
+      <div class="opt">(d) 5.0 – 6.0</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(b) 7.35 – 7.45</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q4.</span> A dilute base is slowly poured into a beaker of dilute acid. Which of the following occur?<br>
+    (i) Temperature of the mixture rises &nbsp; (ii) Temperature falls &nbsp; (iii) Temperature stays constant &nbsp; (iv) A salt is formed</div>
+    <div class="options">
+      <div class="opt">(a) (i) only</div>
+      <div class="opt">(b) (ii) and (iii)</div>
+      <div class="opt">(c) (iii) only</div>
+      <div class="opt">(d) (i) and (iv)</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(d) (i) and (iv) — neutralisation is exothermic and produces a salt (+ water).</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q5.</span> A conductivity apparatus (battery, bulb, electrodes) is dipped once in a glucose solution and once in dilute KOH solution. Which statement(s) are correct?<br>
+    (i) Bulb stays off in glucose solution since it does not ionise &nbsp; (ii) Bulb glows in KOH solution because it furnishes ions &nbsp; (iii) Bulb stays off in both because the circuit is incomplete &nbsp; (iv) Bulb glows in glucose too since it is aqueous</div>
+    <div class="options">
+      <div class="opt">(a) (i) and (ii)</div>
+      <div class="opt">(b) (ii) and (iv)</div>
+      <div class="opt">(c) (iii) only</div>
+      <div class="opt">(d) (iv) only</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(a) (i) and (ii)</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q6.</span> When a reactive metal like magnesium reacts with an acid, hydrogen gas is released. How is its presence confirmed?</div>
+    <div class="options">
+      <div class="opt">(a) It turns lime water milky</div>
+      <div class="opt">(b) It burns with a pop sound near a flame</div>
+      <div class="opt">(c) It extinguishes a burning splint</div>
+      <div class="opt">(d) It bleaches moist litmus paper</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(b) It burns with a pop sound near a flame.</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q7.</span> Electrodes connected to a battery and bulb are dipped separately in (i) dilute sugar solution (ii) tap water (iii) dilute sulphuric acid, with all other connections complete. In which case(s) will the bulb glow?</div>
+    <div class="options">
+      <div class="opt">(a) (iii) only</div>
+      <div class="opt">(b) (i) and (iii)</div>
+      <div class="opt">(c) (ii) and (iii)</div>
+      <div class="opt">(d) all three</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(c) (ii) and (iii) — tap water has dissolved mineral ions; sugar solution has none.</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q8.</span> Four samples P, Q, R, S register pH values of 2, 6, 9 and 13 respectively on a universal indicator strip. Which pair is acidic?</div>
+    <div class="options">
+      <div class="opt">(a) P and Q</div>
+      <div class="opt">(b) Q and R</div>
+      <div class="opt">(c) R and S</div>
+      <div class="opt">(d) P and S</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(a) P and Q (pH below 7)</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q9.</span> To safely prepare dilute sulphuric acid from its concentrated form, the correct practice is to:</div>
+    <div class="options">
+      <div class="opt">(a) Add acid to water slowly, with constant stirring</div>
+      <div class="opt">(b) Add water to acid quickly</div>
+      <div class="opt">(c) Mix equal volumes together directly</div>
+      <div class="opt">(d) Add a base first to cool the acid</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(a) Add acid to water slowly, with constant stirring.</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q10.</span> Strongly heating limestone (CaCO₃) gives a product 'X' along with CO₂. 'X' is:</div>
+    <div class="options">
+      <div class="opt">(a) Slaked lime</div>
+      <div class="opt">(b) Quicklime</div>
+      <div class="opt">(c) Gypsum</div>
+      <div class="opt">(d) Baking soda</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(b) Quicklime (CaO) — CaCO₃ → CaO + CO₂</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q11.</span> Dilute sulphuric acid dropped onto a moist blue litmus strip (held in a delivery-tube set-up) turns it red. This colour change is due to:<br>
+    (i) presence of an acid &nbsp; (ii) presence of a base &nbsp; (iii) H⁺ ions in solution &nbsp; (iv) litmus acting as an indicator</div>
+    <div class="options">
+      <div class="opt">(a) (i) and (iv)</div>
+      <div class="opt">(b) only (ii)</div>
+      <div class="opt">(c) only (iii)</div>
+      <div class="opt">(d) (i), (iii) and (iv)</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(d) (i), (iii) and (iv)</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q12.</span> A corrosive-hazard warning label is compulsorily pasted on containers storing the hydroxide of:</div>
+    <div class="options">
+      <div class="opt">(a) Magnesium</div>
+      <div class="opt">(b) Calcium</div>
+      <div class="opt">(c) Sodium</div>
+      <div class="opt">(d) Aluminium</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(c) Sodium — NaOH is highly corrosive.</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q13.</span> Aluminium turnings are warmed in a test tube with concentrated sodium hydroxide solution. The compound formed is:</div>
+    <div class="options">
+      <div class="opt">(a) NaAlO₂</div>
+      <div class="opt">(b) Na₂AlO₄</div>
+      <div class="opt">(c) Al(OH)₃</div>
+      <div class="opt">(d) Na₃AlO₃</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(a) NaAlO₂ (sodium aluminate), along with H₂ gas.</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q14.</span> Crystals of washing soda, blue vitriol (copper sulphate) and gypsum all share one common feature — they:</div>
+    <div class="options">
+      <div class="opt">(a) are acidic in nature</div>
+      <div class="opt">(b) are always blue coloured</div>
+      <div class="opt">(c) contain a fixed number of water molecules of crystallisation</div>
+      <div class="opt">(d) conduct electricity in the solid state</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(c) contain a fixed number of water molecules of crystallisation.</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q15.</span> Mixing baking soda with a mild edible acid in the presence of moisture releases a gas that makes cake/bread batter soft and spongy. This gas is:</div>
+    <div class="options">
+      <div class="opt">(a) Hydrogen</div>
+      <div class="opt">(b) Carbon monoxide</div>
+      <div class="opt">(c) Carbon dioxide</div>
+      <div class="opt">(d) Oxygen</div>
+    </div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(c) Carbon dioxide</div></details>
+  </div>
+
+  <div class="box tip"><span class="label">Exam Tip</span>Whenever a question mentions "pop sound" → the gas is always Hydrogen. Whenever it mentions "turns lime water milky" → the gas is always CO₂.</div>
+
+  <!-- PART 2 -->
+  <h2 class="part">Part 2 — Assertion & Reason (1 Mark each)</h2>
+  <div class="instr">Choose: (a) Both A and R true, R is correct explanation &nbsp;|&nbsp; (b) Both true, R is NOT correct explanation &nbsp;|&nbsp; (c) A true, R false &nbsp;|&nbsp; (d) A false, R true</div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q16.</span> <b>Assertion:</b> Ethanol and glucose solutions neither conduct electricity nor affect litmus.<br><b>Reason:</b> They remain as molecules in water and do not release ions on dissolving.</div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(a)</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q17.</span> <b>Assertion:</b> Perfectly dry HCl gas does not change the colour of dry litmus paper.<br><b>Reason:</b> This is because dry HCl gas contains no hydrogen atoms at all.</div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(c) — Assertion is true, but the Reason is false. Dry HCl does contain hydrogen atoms; it simply cannot ionise into H⁺ ions without water.</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q18.</span> <b>Assertion:</b> Acidic solutions conduct electric current.<br><b>Reason:</b> On dissolving in water, acids dissociate into ions.</div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(a)</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q19.</span> <b>Assertion:</b> Distilled water is a poor conductor of electricity, while ordinary tap water conducts it easily.<br><b>Reason:</b> Tap water contains dissolved mineral ions, whereas distilled water is free of them.</div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(a)</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q20.</span> <b>Assertion:</b> Sour foods and pickles are best not stored in copper or brass vessels.<br><b>Reason:</b> Acids present in such foods react with these metals to form compounds that can be harmful.</div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(a)</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q21.</span> <b>Assertion:</b> Plaster of Paris articles must be stored in airtight, moisture-free packaging.<br><b>Reason:</b> On absorbing moisture, it slowly converts to gypsum and loses its ability to be moulded.</div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">(a)</div></details>
+  </div>
+
+  <!-- PART 3 -->
+  <h2 class="part">Part 3 — Short Answer Type (2/3 Marks)</h2>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q22.</span> A strip soaked in vanilla essence loses its characteristic smell when dipped into a colourless liquid 'Y'. (a) Name the type of indicator vanilla essence represents. If 'Y' turns blue litmus red, describe what you would observe on treating 'Y' with (i) a magnesium ribbon, and (ii) solid calcium carbonate. Write the balanced equations involved.</div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">
+      Vanilla essence is an <b>olfactory indicator</b> — its smell fades in basic solutions but stays unchanged in acidic ones. Since Y turns blue litmus red, Y is an acid.<br><br>
+      (i) With magnesium ribbon: brisk effervescence; hydrogen gas is evolved.<br>
+      Mg + 2HCl → MgCl₂ + H₂↑<br><br>
+      (ii) With solid calcium carbonate: brisk effervescence; CO₂ gas evolved, which turns lime water milky.<br>
+      CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂↑
+    </div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q23.</span> Two colourless beakers contain an acid and a base respectively, and no litmus paper is available in the lab. Suggest two different methods (other than litmus) to tell them apart.</div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">
+      1. <b>Natural indicator method:</b> Dip strips of china rose (hibiscus) extract — it turns dark pink/magenta in acid and green in base.<br>
+      2. <b>Reaction method:</b> Add a pinch of solid sodium carbonate/baking soda to each — brisk effervescence (CO₂ evolved) confirms the acid; the base shows no reaction.
+    </div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q24.</span> Explain why an aqueous solution of an acid conducts electricity, while the same acid in its pure/anhydrous (water-free) state does not.</div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">
+      An acid needs water to ionise and release H⁺ (as H₃O⁺) ions, which act as charge carriers. In the absence of water, the acid remains as neutral molecules with no free ions available, so it cannot conduct electricity.
+    </div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q25.</span> A student dilutes concentrated nitric acid by pouring water directly into it. Why is this practice dangerous, and what is the correct method?</div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">
+      Dilution is highly exothermic. Adding water to concentrated acid causes the heat to be generated in a small volume of water, which can boil suddenly and splash acid violently — risking burns. The safe method is to add the acid slowly, in small amounts, into a larger volume of water, with constant stirring, so the heat is dissipated safely.
+    </div></details>
+  </div>
+
+  <div class="box mistake"><span class="label">Common Mistake</span>Students often write "acid is added to water" and "water is added to acid" as if they mean the same thing — in exams, always specify which is added to which; the order is safety-critical and frequently carries marks.</div>
+
+  <!-- PART 4 -->
+  <h2 class="part">Part 4 — Long Answer Type (5 Marks)</h2>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q26.</span> During the industrial preparation of caustic soda, a gas 'P' is released as a by-product. When 'P' is passed over dry slaked lime, it forms compound 'Q', which is used to disinfect swimming pool water. Identify P and Q, giving the chemical equations involved.</div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">
+      P = Chlorine gas (Cl₂)<br>
+      Q = Bleaching powder, CaOCl₂<br><br>
+      Chlor-alkali process: 2NaCl + 2H₂O → 2NaOH + Cl₂ + H₂<br>
+      Formation of Q: Ca(OH)₂ + Cl₂ → CaOCl₂ + H₂O
+    </div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q27.</span> Iron filings are treated with dilute sulphuric acid, producing a gas that is useful in the manufacture of vegetable ghee (hydrogenation of oils). Name the gas, write the balanced equation, and describe a test to confirm it.</div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">
+      Gas evolved: Hydrogen (H₂)<br>
+      Fe + H₂SO₄ → FeSO₄ + H₂↑<br>
+      Test: Bring a burning matchstick/splint near the mouth of the test tube — the gas burns with a characteristic 'pop' sound.
+    </div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q28.</span> (a) Compound 'M' is used in fire extinguishers and, on heating, converts into compound 'N', which is used to soften permanently hard water. Identify M and N.<br>
+    (b) Give the chemical formula of Plaster of Paris and state the temperature range at which gypsum is heated to obtain it.</div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">
+      (a) M = Sodium hydrogen carbonate (NaHCO₃); N = Sodium carbonate (Na₂CO₃)<br>
+      2NaHCO₃ → Na₂CO₃ + CO₂ + H₂O<br><br>
+      (b) Plaster of Paris: CaSO₄·½H₂O, obtained by heating gypsum at 373–393 K (100–120°C).
+    </div></details>
+  </div>
+
+  <div class="q">
+    <div class="qtext"><span class="qn">Q29.</span> A metal carbonate 'X' reacts with dilute acid to release a gas which, when passed into limewater 'Y', turns it milky and forms back a carbonate precipitate. Separately, gas 'G', collected at the anode during electrolysis of brine, is passed over dry 'Y' to give compound 'Z', which is used to disinfect drinking water. Identify X, Y and Z, with equations.</div>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">
+      X = Any metal carbonate, e.g. Calcium carbonate (CaCO₃)<br>
+      Y = Slaked lime, Ca(OH)₂<br>
+      Z = Bleaching powder, CaOCl₂<br><br>
+      CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂↑<br>
+      CO₂ + Ca(OH)₂ → CaCO₃ + H₂O<br>
+      Cl₂ + Ca(OH)₂ → CaOCl₂ + H₂O
+    </div></details>
+  </div>
+
+  <!-- PART 5 -->
+  <h2 class="part">Part 5 — Case Study / Source-Based Questions (5 Marks)</h2>
+
+  <div class="case">
+    <div class="pill">Case Study 1</div>
+    <div class="passage">A universal indicator paper changes colour continuously across the pH scale of 0–14, letting us judge exactly how acidic or basic a solution is, rather than just acidic vs basic.</div>
+    <ol>
+      <li>Solution R is a weak acid and solution S is a weak base. Roughly where on the 0–14 scale would you mark R and S?</li>
+      <li>Suggest one substance you could add to raise the pH of a neutral solution, and one to lower it.</li>
+      <li>If the pH of a solution rises from 9 to 11, what happens to its hydroxide ion (OH⁻) concentration, and what colour shift would the pH paper show?</li>
+    </ol>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">
+      1. R (weak acid) ≈ pH 5–6; S (weak base) ≈ pH 8–9 (close to neutral, unlike strong acids/bases near the extremes).<br>
+      2. To raise pH: add a base such as sodium hydroxide. To lower pH: add an acid such as dilute hydrochloric acid.<br>
+      3. OH⁻ concentration increases (by a factor of 100, since pH rose by 2 units); the pH paper colour shifts further towards blue/violet.
+    </div></details>
+  </div>
+
+  <div class="case">
+    <div class="pill">Case Study 2</div>
+    <div class="passage">In a diaphragm cell, electrolysis of brine (concentrated NaCl solution) releases gas 'M' at one electrode and gas 'N' at the other electrode, along with an alkaline solution 'L'. Gas N burns with a pop sound; gas M is used for disinfecting water and, when passed over dry slaked lime, gives a solid compound 'K'.</div>
+    <ol>
+      <li>Name gases M and N.</li>
+      <li>Write the balanced chemical equation for the formation of solution L.</li>
+      <li>(i) What happens when red litmus solution is added to L? (ii) What happens when CO₂ is passed through an ammoniacal solution of NaCl? (iii) Identify K and write the equation for its formation.</li>
+    </ol>
+    <details class="ans"><summary>Show Answer</summary><div class="reveal">
+      1. M = Chlorine gas (Cl₂); N = Hydrogen gas (H₂)<br>
+      2. 2NaCl + 2H₂O → 2NaOH + Cl₂ + H₂<br>
+      3. (i) Red litmus turns blue, since L (NaOH) is basic.<br>
+      (ii) It forms sodium hydrogen carbonate: NaCl + NH₃ + CO₂ + H₂O → NaHCO₃ + NH₄Cl<br>
+      (iii) K = Bleaching powder (CaOCl₂); Ca(OH)₂ + Cl₂ → CaOCl₂ + H₂O
+    </div></details>
+  </div>
+
+  <div class="box def"><span class="label">Quick Recall</span>Chlor-alkali process always gives 3 products: NaOH (at the cell/solution), Cl₂ (anode), H₂ (cathode) — remember it as "Chlorine anode, Hydrogen cathode, NaOH stays behind."</div>
+
+  <footer>
+    Novus Era Classes · Master Mursha · Shaheen Bagh, Okhla, New Delhi<br>
+    Class 10th Science — Acids, Bases and Salts · For practice purposes only
+  </footer>
+
+</div>
+</body>
+</html>
